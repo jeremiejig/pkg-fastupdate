@@ -10,10 +10,12 @@ function init -a path --on-event init_fastupdate
 end
 
 function fastupdate -d "FastUpdate Print the git version"
-	omf.cd fastupdate
-	type cd
-	git describe --always --long --dirty
-	popd
+	if test -d $OMF_PATH/pkg/fastupdate
+		set -xl GIT_WORK_TREE $OMF_PATH/pkg/fastupdate
+	else if test -d $OMF_CONFIG/pkg/fastupdate
+		set -xl GIT_WORK_TREE $OMF_CONFIG/pkg/fastupdate
+	end
+	git --git-dir $GIT_WORK_TREE/.git describe --always --long --dirty
 end
 
 function uninstall --on-event uninstall_fastupdate
