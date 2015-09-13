@@ -15,7 +15,7 @@ function fastupdate -d "FastUpdate Print the git version"
 	else if test -d $OMF_CONFIG/pkg/fastupdate
 		set -xl GIT_WORK_TREE $OMF_CONFIG/pkg/fastupdate
 	end
-	git --git-dir $GIT_WORK_TREE/.git describe --always --long --dirty
+	git -C $GIT_WORK_TREE describe --always --long --dirty
 end
 
 function uninstall --on-event uninstall_fastupdate
